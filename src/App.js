@@ -10,8 +10,6 @@ import MainPage from "./Components/MainPage";
 import Cookies from "js-cookie";
 import validator from "validator";
 
-
-
 //function to handle the register of a user
 const registerHandler = async (e, navigate) => {
   e.preventDefault();
