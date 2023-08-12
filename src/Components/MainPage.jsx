@@ -16,6 +16,7 @@ const MainPage = ({ navigate, logoutHandler ,increment,bringAnimation,disappearA
 
   useEffect(() => {
     const fetchProduct = async() => {
+      bringAnimation();
       try{
       const res = await axios.get(process.env.REACT_APP_SERVER_URL+`/product/all`,{
         headers : {
@@ -26,10 +27,9 @@ const MainPage = ({ navigate, logoutHandler ,increment,bringAnimation,disappearA
     }catch(err){
       toast.error("Couldn't fetch the products due to internal error");
     }
-    }
-    bringAnimation();
-    fetchProduct();
     disappearAnimation();
+    }
+    fetchProduct();
   
   },[increment,bringAnimation,disappearAnimation])
 
