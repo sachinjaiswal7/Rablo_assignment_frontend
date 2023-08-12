@@ -23,6 +23,7 @@ const registerHandler = async (e, navigate) => {
 
   //checking if the password is strong or not 
   if (!validator.isStrongPassword(password)) {
+    disappearAnimation();
     return toast.error("Password must contain at least (8 characters, 1 UpperCase, 1 LowerCaser, 1 symbol and 1 number) ")
   }
 
@@ -76,6 +77,7 @@ const loginHandler = async (e, navigate) => {
 
   //checking if the password is strong or not 
   if (!validator.isStrongPassword(password)) {
+    disappearAnimation();
     return toast.error("Password must contain at least (8 characters, 1 UpperCase, 1 LowerCaser, 1 symbol and 1 number) ")
   }
 
@@ -114,17 +116,23 @@ const loginHandler = async (e, navigate) => {
 const addProductToDataBase = async (productId, productName, company, price, rating,featured,setProductId,setCompanyName,setName, setPrice,setRating,setCheck) => {
   //all the below checks are validators 
   bringAnimation();
-  if (!productId) { return toast.error("Please provide the productId"); }
+  if (!productId) {
+    disappearAnimation();
+     return toast.error("Please provide the productId"); }
   if (!productName) {
+    disappearAnimation();
     return toast.error("Please provide the productName");
   }
   if (!company) {
+    disappearAnimation();
     return toast.error("Please provide the company Name");
   }
   if (!price || !validator.isNumeric(price) || price <= 0) {
+    disappearAnimation();
     return toast.error("Price should be a positive number");
   }
   if (!rating || (!validator.isNumeric(rating) && !validator.isDecimal(rating)) || rating < 0 || rating > 5) {
+    disappearAnimation();
     return toast.error("Rating should be between 0 - 5");
   }
 
