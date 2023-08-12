@@ -12,6 +12,7 @@ import validator from "validator";
 
 //function to handle the register of a user
 const registerHandler = async (e, navigate) => {
+  bringAnimation();
   e.preventDefault();
 
   // taking all the fields from the form of the register form
@@ -51,6 +52,7 @@ const registerHandler = async (e, navigate) => {
       toast.error("couldn't complete the registeration try again later");
     }
   }
+  disappearAnimation();
 }
 
 
@@ -64,6 +66,7 @@ const logoutHandler = (navigate) => {
 
 //function to handle the login of the user
 const loginHandler = async (e, navigate) => {
+  bringAnimation();
   // stoping the form from doing its default working.
   e.preventDefault();
 
@@ -102,6 +105,7 @@ const loginHandler = async (e, navigate) => {
       toast.error("couldn't complete the login try again later");
     }
   }
+  disappearAnimation();
 
 }
 
@@ -109,6 +113,7 @@ const loginHandler = async (e, navigate) => {
 //function to handle the adding of the product to the backend
 const addProductToDataBase = async (productId, productName, company, price, rating,featured,setProductId,setCompanyName,setName, setPrice,setRating,setCheck) => {
   //all the below checks are validators 
+  bringAnimation();
   if (!productId) { return toast.error("Please provide the productId"); }
   if (!productName) {
     return toast.error("Please provide the productName");
@@ -148,8 +153,19 @@ const addProductToDataBase = async (productId, productName, company, price, rati
       toast.error("There was some error but it may be possible that the product has been added");
     }
   }
+  disappearAnimation();
 }
 
+//function to show the loading animation
+const bringAnimation = () => {
+  document.querySelector(".lds-spinner").style.display = "block";
+}
+
+
+//function to make the loading animation disappear
+const disappearAnimation = () => {
+  document.querySelector(".lds-spinner").style.display = "none";
+}
 
 
 
@@ -164,7 +180,7 @@ function App() {
   return (
 
     <Routes>
-      <Route path="/" element={<MainPage increment={increment}  navigate={navigate} logoutHandler={logoutHandler} />} />
+      <Route path="/" element={<MainPage bringAnimation={bringAnimation} disappearAnimation={disappearAnimation} increment={increment}  navigate={navigate} logoutHandler={logoutHandler} />} />
       <Route path="/login" element={<Login loginHandler={loginHandler} navigate={navigate} />} />
       <Route path="/register" element={<Register registerHandler={registerHandler} navigate={navigate} />} />
       <Route path="/addProduct" element={<AddProduct setIncrement={setIncrement} increment={increment} addProductToDataBase={addProductToDataBase} navigate={navigate} />} />

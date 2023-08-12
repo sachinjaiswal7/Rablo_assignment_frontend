@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import {toast} from "react-hot-toast";
 
-const MainPage = ({ navigate, logoutHandler ,increment}) => {
+const MainPage = ({ navigate, logoutHandler ,increment,bringAnimation,disappearAnimation}) => {
   const [products,setProducts] = useState([]);
   useEffect(() => {
     if (!Cookies.get("token")) {
@@ -27,9 +27,11 @@ const MainPage = ({ navigate, logoutHandler ,increment}) => {
       toast.error("Couldn't fetch the products due to internal error");
     }
     }
+    bringAnimation();
     fetchProduct();
+    disappearAnimation();
   
-  },[increment])
+  },[increment,bringAnimation,disappearAnimation])
 
   return (
     <div className="main-page">
